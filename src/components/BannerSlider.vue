@@ -3,11 +3,11 @@
     <div class="top__block">
       <ul>
         <li class="col-lg-3 " v-for="banner in getBanners" :key="banner.id">
-          <img v-if="imageUrl" :src="imageUrl" alt="#" />
-          <img
-            v-if="!imageUrl"
+          <img :src="getImageUrl" alt="#" />
+          <!-- <img
+            v-if="getImageUrl === null"
             src="https://s1.1zoom.ru/big0/697/Love_Night_Moon_Trees_Silhouette_Two_Dating_576752_1280x853.jpg"
-          />
+          /> -->
           <input
             type="file"
             style="display:none"
@@ -30,22 +30,23 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import firebase from "firebase";
+import { mapGetters, mapMutations, mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      imageUrl: "",
-      image: null,
+      // imageUrl: "",
+      // image: null,
     };
   },
   name: "BannerSlider",
   computed: {
-    ...mapGetters(["getBanners"]),
+    ...mapGetters(["getBanners", "getImageUrl"]),
   },
   methods: {
-    onPickFile(event) {
-      console.log(event);
+    ...mapMutations(["changeImageUrl", "changeImage"]),
+    ...mapActions(["save"]),
+    onPickFile() {
       this.$refs.fileInput[0].click();
     },
     onFilePicked(event) {
@@ -56,17 +57,11 @@ export default {
       }
       const fileReader = new FileReader();
       fileReader.addEventListener("load", () => {
-        this.imageUrl = fileReader.result;
+        this.changeImageUrl(fileReader.result);
+        // вызвать мутации
       });
       fileReader.readAsDataURL(files[0]);
-      this.image = files[0];
-    },
-    save() {
-      firebase
-        .storage()
-        .ref(`banners/ ${this.image.name}`)
-        .put(this.image);
-      this.imageUrl = "";
+      this.changeImage(files[0]);
     },
   },
 };
