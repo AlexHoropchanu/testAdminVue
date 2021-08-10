@@ -2,67 +2,42 @@
   <div>
     <div class="top__block">
       <ul>
-        <li class="col-lg-3 " v-for="banner in getBanners" :key="banner.id">
-          <img :src="getImageUrl" alt="#" />
-          <!-- <img
-            v-if="getImageUrl === null"
-            src="https://s1.1zoom.ru/big0/697/Love_Night_Moon_Trees_Silhouette_Two_Dating_576752_1280x853.jpg"
-          /> -->
-          <input
-            type="file"
-            style="display:none"
-            ref="fileInput"
-            accept="image/*"
-            @change="onFilePicked"
-          />
-          <button @click="onPickFile">upload image</button>
-          <label
-            ><span> Url: </span><input type="text" :value="banner.url"
-          /></label>
-          <label
-            ><span> Текст:</span> <input type="text" :value="banner.text"
-          /></label>
-          <button @click="save">save</button>
-        </li>
+        <Banner
+          class="col-lg-3"
+          :card="banner"
+          v-for="banner in getBanners"
+          :key="banner.id"
+        >
+        </Banner>
       </ul>
+      <button @click="save">save</button>
+      <div @click="addBanner">+</div>
     </div>
   </div>
 </template>
 
 <script>
+import Banner from "../components/Banner.vue";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
+  components: {
+    Banner,
+  },
   data() {
-    return {
-      // imageUrl: "",
-      // image: null,
-    };
+    return {};
+  },
+  async mounted() {
+    await this.$store.dispatch("getBanners");
+    console.log(typeof getBanners);
   },
   name: "BannerSlider",
   computed: {
     ...mapGetters(["getBanners", "getImageUrl"]),
   },
   methods: {
-    ...mapMutations(["changeImageUrl", "changeImage"]),
+    ...mapMutations(["changeImageUrl", "changeImage", "addBanner"]),
     ...mapActions(["save"]),
-    onPickFile() {
-      this.$refs.fileInput[0].click();
-    },
-    onFilePicked(event) {
-      const files = event.target.files;
-      let fileName = files[0].name;
-      if (fileName.lastIndexOf(".") <= 0) {
-        return alert("Выберите картинку с расширением");
-      }
-      const fileReader = new FileReader();
-      fileReader.addEventListener("load", () => {
-        this.changeImageUrl(fileReader.result);
-        // вызвать мутации
-      });
-      fileReader.readAsDataURL(files[0]);
-      this.changeImage(files[0]);
-    },
   },
 };
 </script>
