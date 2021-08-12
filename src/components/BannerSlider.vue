@@ -10,9 +10,12 @@
         >
         </Banner>
       </ul>
-      <button @click="save">save</button>
-      <div @click="addBanner">+</div>
+      <button @click="save" class="btn btn-primary button">save</button>
+      <div @click="addBanner" class="btn btn-primary button">Добавить баннер</div>
     </div>
+    <div class="spinner-border" role="status">
+
+</div>
   </div>
 </template>
 
@@ -29,7 +32,6 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("getBanners");
-    console.log(typeof getBanners);
   },
   name: "BannerSlider",
   computed: {
@@ -43,6 +45,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button{
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+
+}
 ul {
   list-style-type: none;
   padding: 0;
@@ -57,10 +65,6 @@ ul {
       margin: 30px;
     }
   }
-}
-button {
-  width: inherit;
-  margin-bottom: 30px;
 }
 label {
   width: inherit;

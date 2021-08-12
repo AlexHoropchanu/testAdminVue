@@ -6,6 +6,7 @@ export default {
   },
   getters: {
     getBanners(state) {
+      // console.log(state.banners);
       return state.banners;
     },
     getImageUrl(state) {
@@ -31,7 +32,6 @@ export default {
     },
     changeImageUrl(state, payload) {
       state.saveImages.push(payload);
-      // state.banners[payload.id].imageUrl = payload.fileUrl;
     },
     cleareImageUrl(state) {
       state.imageUrl = "";
@@ -49,6 +49,20 @@ export default {
     },
   },
   actions: {
+      async  deleteBanner(context, payload) {
+       await context.state.banners.forEach((element, index, object) => {
+        if (element.id == payload.target.id) {
+          object.splice(index, 1);
+          console.dir(element.imageUrl)
+          const ref = firebase.storage().refFromURL(element.imageUrl);
+          ref.delete()
+        }
+      });
+        return firebase
+        .database()
+        .ref("banners")
+        .set(context.state.banners);
+    },
     async save(context) {
       if (context.state.saveImages != 0) {
         try {
