@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <img :src="card.imageUrl" alt="#" class="image-banner"   /><br/>
+    <img :src="card.imageUrl" alt="#" class="image-banner" /><br />
     <input
       type="file"
       style="display:none"
@@ -9,10 +9,14 @@
       @change="onFilePicked"
       :id="card.id"
     />
-    <label :for="card.id" class="btn btn-secondary">Upload</label><br/>
-    <label><span>Url: </span><input type="text" :value="card.url" /></label><br/>
-    <label><span> Текст:</span> <input type="text" :value="card.text" /></label><br/>
-    <button @click="deleteBanner" :id="card.id" class="btn btn-danger">Удалить</button><br/>
+    <label :for="card.id" class="btn btn-secondary">Upload</label><br />
+    <label><span>Url: </span><input type="text" v-model="card.url"/></label
+    ><br />
+    <label><span> Текст:</span> <input type="text" v-model="card.text"/></label
+    ><br />
+    <button @click="deleteBanner" :id="card.id" class="btn btn-danger">
+      Удалить</button
+    ><br />
   </div>
 </template>
 
@@ -28,7 +32,7 @@ export default {
   },
   methods: {
     ...mapMutations(["changeImageUrl"]),
-    ...mapActions(['deleteBanner']),
+    ...mapActions(["deleteBanner"]),
     onFilePicked(event) {
       const files = {
         pictures: event.target.files[0],
@@ -39,6 +43,7 @@ export default {
       const fileUrl = URL.createObjectURL(event.target.files[0]);
       this.card.imageUrl = fileUrl;
       this.changeImageUrl(files);
+      console.log(event.target.files[0]);
 
       // this.changeImage(files[0]);
     },
@@ -47,18 +52,18 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
 }
-.image-banner{
+.image-banner {
   width: 100%;
 }
-img{
+img {
   width: 100%;
-  height: 220px;;
+  height: 220px;
 }
-input{
+input {
   width: 100%;
   padding: 10px 20px;
 }

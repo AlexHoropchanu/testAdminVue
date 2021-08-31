@@ -3,8 +3,12 @@ export default {
   state: {
     saveImages: [],
     banners: [],
+    showPreloader: false,
   },
   getters: {
+    getPreloader(state) {
+      return state.showPreloader;
+    },
     getBanners(state) {
       // console.log(state.banners);
       return state.banners;
@@ -17,13 +21,16 @@ export default {
     // },
   },
   mutations: {
+    changeShowPreloader(state) {
+      state.showPreloader = true;
+    },
     addBanner(state) {
       state.banners.push({
         imageUrl:
           "https://s1.1zoom.ru/big0/697/Love_Night_Moon_Trees_Silhouette_Two_Dating_576752_1280x853.jpg",
         id: Date.now(),
-        url: "d",
-        text: "a",
+        url: "",
+        text: "",
       });
       // console.log(state.banners);
     },
@@ -49,16 +56,16 @@ export default {
     },
   },
   actions: {
-      async  deleteBanner(context, payload) {
-       await context.state.banners.forEach((element, index, object) => {
+    async deleteBanner(context, payload) {
+      await context.state.banners.forEach((element, index, object) => {
         if (element.id == payload.target.id) {
           object.splice(index, 1);
-          console.dir(element.imageUrl)
+          console.dir(element.imageUrl);
           const ref = firebase.storage().refFromURL(element.imageUrl);
-          ref.delete()
+          ref.delete();
         }
       });
-        return firebase
+      return firebase
         .database()
         .ref("banners")
         .set(context.state.banners);
