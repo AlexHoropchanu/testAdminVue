@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div class="top__block">
+    <div class="top__block">
       <div class="spinner-border" role="status" v-if="!getPreloader"></div>
       <div class="top banner">
         <h3 style="text-align: center">На главной верх</h3>
@@ -23,7 +23,7 @@
     <div class="background__Banner">
       <h3 style=" text-align: center">Баннер на заднем фоне</h3>
       <CardBackgroundWrapper></CardBackgroundWrapper>
-    </div> -->
+    </div>
     <div class="news__banner">
       <CardNewsWrapper></CardNewsWrapper>
     </div>
@@ -31,16 +31,16 @@
 </template>
 
 <script>
-// import Banner from "../components/Banner.vue";
+import Banner from "../components/Banner.vue";
 import CardNewsWrapper from "../components/banners/CardNewsWrapper.vue";
-// import CardBackgroundWrapper from "../components/banners/CardBackgroundWrapper.vue";
+import CardBackgroundWrapper from "../components/banners/CardBackgroundWrapper.vue";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   components: {
-    // CardBackgroundWrapper,
+    CardBackgroundWrapper,
     CardNewsWrapper,
-    // Banner,
+    Banner,
   },
   data() {
     return {};

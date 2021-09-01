@@ -3,10 +3,11 @@
     <div class="spinner-border" role="status" v-if="!showPreloader"></div>
     <div class="top banner">
       <h3 style="text-align: center">На главной новости внизу</h3>
-      <ul v-if="showPreloader">
+      <ul v-if="showPreloader" class="list__banner">
         <BannerNews
           class="col-lg-3"
           :banner="banner"
+          :banners="banners"
           :saveImages="saveImages"
           v-for="banner in banners"
           :key="banner.id"
@@ -36,20 +37,20 @@ export default {
   components: {
     BannerNews,
   },
-  mounted: {
-    async getBanners() {
-      const snapshot = await firebase
-        .database()
-        .ref("banners/news")
-        .once("value");
-      if (snapshot.val() === null) {
-        this.banners = [];
-      } else {
-        this.banners = snapshot.val();
-      }
-      // const bannersObj = snapshot.val();
-      // context.commit("setBanners", bannersObj);
-    },
+  async mounted() {
+    console.log("мы в функции");
+    const snapshot = await firebase
+      .database()
+      .ref("banners/news")
+      .once("value");
+    if ((await snapshot.val()) === null) {
+      console.log(await snapshot.val());
+      this.banners = [];
+    } else {
+      this.banners = await snapshot.val();
+    }
+    // const bannersObj = snapshot.val();
+    // context.commit("setBanners", bannersObj);
   },
   methods: {
     addBanner() {
@@ -63,6 +64,7 @@ export default {
     },
     async save() {
       if (this.saveImages != 0) {
+        console.log(this.saveImages);
         try {
           for (let el = this.saveImages.length - 1; el >= 0; el--) {
             let fl = this.saveImages[el];
@@ -83,7 +85,7 @@ export default {
       //.delete() удаление со сторейдж .set перезаписываем датабейс
       return firebase
         .database()
-        .ref("banners/news/")
+        .ref("banners/news")
         .set(this.banners);
     },
   },
@@ -105,5 +107,25 @@ img {
 input {
   width: 100%;
   padding: 10px 20px;
+}
+.button {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.list__banner {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: inherit;
+      margin: 30px;
+    }
+  }
 }
 </style>

@@ -19,12 +19,27 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   name: "BannerNews",
-  props: ["banner", "saveImages"],
+  props: ["banner", "saveImages", "banners"],
   methods: {
     // ...mapMutations(["changeImageUrl"]),
     // ...mapActions(["deleteBanner"]),
+    async deleteBanner(payload) {
+      await this.banners.forEach((element, index, object) => {
+        if (element.id == payload.target.id) {
+          object.splice(index, 1);
+          console.dir(element.imageUrl);
+          const ref = firebase.storage().refFromURL(element.imageUrl);
+          ref.delete();
+        }
+      });
+      return firebase
+        .database()
+        .ref("banners/news")
+        .set(this.banners);
+    },
     onFilePicked(event) {
       const files = {
         pictures: event.target.files[0],
