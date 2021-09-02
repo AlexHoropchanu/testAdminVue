@@ -1,7 +1,13 @@
 <template>
   <div>
     <div class="spinner-border" role="status" v-if="!preloader"></div>
-    <div class="wrapper" v-if="preloader">
+    <div class="wrapper__banner row align-items-center">
+      <div class="wrapper__banner__left col-lg-3">
+        <label for=""><input type="radio" class="radio"> Фото на фоне</label><label for=""><input type="radio" class="radio">Просто фон</label>
+        
+      </div>
+          <div class="wrapper__banner__right col-lg-9">
+            <div class="wrapper" v-if="preloader">
       <img :src="card.imageUrl" alt="#" class="image-banner" /><br />
       <input
         type="file"
@@ -11,7 +17,9 @@
         :id="card.id"
       />
       <label :for="card.id" class="btn btn-secondary">Upload</label><br />
-      <button @click="save" :id="card.id" class="btn btn-danger">
+          </div>
+    </div>
+      <button @click="save" :id="card.id" class="btn btn-danger col-lg-12">
         Сохранить</button
       ><br />
     </div>
@@ -96,6 +104,15 @@ export default {
 </script>
 
 <style lang="scss">
+label{
+  display: flex;
+  width: 100%;
+}
+.radio{
+  width: 10px;
+  margin: 10px;
+    height: 10px;
+}
 .wrapper {
   display: flex;
   flex-direction: column;

@@ -67,7 +67,7 @@ export default {
       });
       return firebase
         .database()
-        .ref("banners")
+        .ref("banners/top")
         .set(context.state.banners);
     },
     async save(context) {
@@ -75,7 +75,7 @@ export default {
         try {
           for (let el = context.state.saveImages.length - 1; el >= 0; el--) {
             let fl = context.state.saveImages[el];
-            const ref = firebase.storage().ref(`banners/ ${fl.pictures.name}`);
+            const ref = firebase.storage().ref(`banners/top/ ${fl.pictures.name}`);
             const snapshot = await ref.put(fl.pictures);
             const downloadUrl = await snapshot.ref.getDownloadURL();
             context.commit("ubdateImgeUrl", { downloadUrl, id: fl.id });
@@ -87,13 +87,13 @@ export default {
       //.delete() удаление со сторейдж .set перезаписываем датабейс
       return firebase
         .database()
-        .ref("banners")
+        .ref("banners/top")
         .set(context.state.banners);
     },
     async getBanners(context) {
       const snapshot = await firebase
         .database()
-        .ref("banners")
+        .ref("banners/top")
         .once("value");
       const bannersObj = snapshot.val();
       context.commit("setBanners", bannersObj);
