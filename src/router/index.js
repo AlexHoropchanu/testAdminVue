@@ -4,7 +4,7 @@ import Contacts from "../components/Contacts.vue";
 import Help from "../components/Help";
 // import Statistic from "../components/Statistic.vue";
 import BannerSlider from "../components/BannerSlider";
-import Films from "../components/Films";
+import Films from "../components/Films/Films";
 import Kino from "../components/Kino";
 import News from "../components/News";
 import Promotions from "../components/Promotions";
@@ -14,14 +14,22 @@ import Mailing from "../components/Mailing";
 // import Login from "../components/AuthLayout/Login";
 import Layout from '../components/Layout/Layout'
 import AuthLayout from '../components/AuthLayout/AuthLayout'
+import EditFilm from '../components/Films/EditFilm.vue'
 Vue.use(VueRouter);
 
 const routes = [
+
   {
     path: "/authLayout",
     name: "Authlayout",
     meta: { layout: 'authLayout' },
     component: AuthLayout,
+  },
+    {
+    path: "/films/edit",
+    name: "EditFilm",
+    meta: { layout: 'layout' },
+    component: EditFilm,
   },
   {
     path: "/layout",

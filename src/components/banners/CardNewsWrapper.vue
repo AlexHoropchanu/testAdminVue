@@ -38,7 +38,6 @@ export default {
     BannerNews,
   },
   async mounted() {
-    console.log("мы в функции");
     const snapshot = await firebase
       .database()
       .ref("banners/news")
@@ -49,8 +48,6 @@ export default {
     } else {
       this.banners = await snapshot.val();
     }
-    // const bannersObj = snapshot.val();
-    // context.commit("setBanners", bannersObj);
   },
   methods: {
     addBanner() {
@@ -76,13 +73,11 @@ export default {
             this.banners.filter(
               (el) => el.id == fl.id
             )[0].imageUrl = downloadUrl;
-            // context.commit("ubdateImgeUrl", { downloadUrl, id: fl.id });
           }
         } catch {
           console.log("err");
         }
       }
-      //.delete() удаление со сторейдж .set перезаписываем датабейс
       return firebase
         .database()
         .ref("banners/news")
