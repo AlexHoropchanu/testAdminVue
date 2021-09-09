@@ -3,22 +3,40 @@
     <div class="spinner-border" role="status" v-if="!preloader"></div>
     <div class="wrapper__banner row align-items-center">
       <div class="wrapper__banner__left col-lg-3">
-        <label for=""><input type="radio" class="radio"> Фото на фоне</label><label for=""><input type="radio" class="radio">Просто фон</label>
-        
+        <label for="">
+          <input
+            type="radio"
+            class="radio"
+            id="one"
+            :value="true"
+            v-model="card.picked"
+          />
+          Фото на фоне</label
+        >
+        <label for="">
+          <input
+            type="radio"
+            class="radio"
+            id="two"
+            :value="false"
+            v-model="card.picked"
+          />Просто фон</label
+        >
       </div>
-          <div class="wrapper__banner__right col-lg-9">
-            <div class="wrapper" v-if="preloader">
-      <img :src="card.imageUrl" alt="#" class="image-banner" /><br />
-      <input
-        type="file"
-        style="display:none"
-        accept="image/*"
-        @change="onFilePicked"
-        :id="card.id"
-      />
-      <label :for="card.id" class="btn btn-secondary">Upload</label><br />
-          </div>
-    </div>
+      <div class="wrapper__banner__right col-lg-9">
+        <div class="wrapper" v-if="preloader">
+          <img v-if="card.picked" :src="card.imageUrl" alt="#" class="image-banner" /><br />
+          <img v-if="!card.picked" src="https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg" alt="#" class="image-banner" /><br />
+          <input
+            type="file"
+            style="display:none"
+            accept="image/*"
+            @change="onFilePicked"
+            :id="card.id"
+          />
+          <label :for="card.id" class="btn btn-secondary">Upload</label><br />
+        </div>
+      </div>
       <button @click="save" :id="card.id" class="btn btn-danger col-lg-12">
         Сохранить</button
       ><br />
@@ -32,9 +50,10 @@ export default {
   name: "CardBackgroundWrapper",
   data() {
     return {
+
       preloader: false,
       card: {
-        type: false,
+        picked: false,
         imageUrl:
           "https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg",
         id: new Date(),
@@ -67,7 +86,8 @@ export default {
       this.card.newPick = file;
     },
     async save() {
-      if (this.card.newPick) {
+      if(this.card.picked){
+              if (this.card.newPick) {
         try {
           try {
             await firebase
@@ -91,6 +111,7 @@ export default {
           console.error(e);
         }
       }
+      }
       const fileDb = {
         imageUrl: this.card.imageUrl,
       };
@@ -104,14 +125,14 @@ export default {
 </script>
 
 <style lang="scss">
-label{
+label {
   display: flex;
   width: 100%;
 }
-.radio{
+.radio {
   width: 10px;
   margin: 10px;
-    height: 10px;
+  height: 10px;
 }
 .wrapper {
   display: flex;

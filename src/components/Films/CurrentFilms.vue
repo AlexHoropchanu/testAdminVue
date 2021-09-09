@@ -1,15 +1,12 @@
 <template>
   <div class="wrapper">
     <div class=" current__films">
-      <div class="component1">     
-
-      <div class="card ">
-        <img
-          :src="currentFilm.imageUrl"
-          alt="#"
-        />
-        <button class="dangger">удалить</button>
-        <button @click="rout">редактировать</button></div>
+      <div class="component1">
+        <div class="card ">
+          <img :src="currentFilm.imageUrl" alt="#" />
+          <b-button variant="danger">удалить</b-button>
+          <b-button variant="warning" @click="rout">редактировать</b-button>
+        </div>
       </div>
     </div>
   </div>
@@ -23,17 +20,17 @@ export default {
       preloader: false,
     };
   },
-    props:['currentFilm'],
-    methods:{
-      rout(){
-        this.$router.push('films/edit')
-      }
-    }
+  props: ["currentFilm", "index"],
+  methods: {
+    rout() {
+      this.$router.push({ name: "EditFilm", params: { id: this.index } });
+    },
+  },
 };
 </script>
 
 <style>
-.component1{
+.component1 {
   display: flex;
   flex-wrap: wrap;
 }

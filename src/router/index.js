@@ -12,35 +12,34 @@ import Pages from "../components/Pages";
 import Users from "../components/Users";
 import Mailing from "../components/Mailing";
 // import Login from "../components/AuthLayout/Login";
-import Layout from '../components/Layout/Layout'
-import AuthLayout from '../components/AuthLayout/AuthLayout'
-import EditFilm from '../components/Films/EditFilm.vue'
+import Layout from "../components/Layout/Layout";
+import AuthLayout from "../components/AuthLayout/AuthLayout";
+import EditFilm from "../components/Films/EditFilm.vue";
 Vue.use(VueRouter);
 
 const routes = [
-
   {
     path: "/authLayout",
     name: "Authlayout",
-    meta: { layout: 'authLayout' },
+    meta: { layout: "authLayout" },
     component: AuthLayout,
   },
-    {
-    path: "/films/edit",
+  {
+    path: "/films/edit/:id",
     name: "EditFilm",
-    meta: { layout: 'layout' },
+    meta: { layout: "layout" },
     component: EditFilm,
   },
   {
     path: "/layout",
     name: "layout",
-    meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Layout,
   },
   {
     path: "/banner-slider",
     name: "BannerSlider",
-    meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: BannerSlider,
   },
   // {
@@ -52,61 +51,61 @@ const routes = [
   {
     path: "/mailing",
     name: "Mailing",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Mailing,
   },
   {
     path: "/users",
     name: "Users",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Users,
   },
   {
     path: "/pages",
     name: "Pages",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Pages,
   },
   {
     path: "/promotions",
     name: "Promotions",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Promotions,
   },
   {
     path: "/news",
     name: "News",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: News,
   },
   {
     path: "/kino",
     name: "Kino",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Kino,
   },
   {
     path: "/films",
     name: "Films",
-    meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Films,
   },
   {
     path: "/contacts",
     name: "Contacts",
-    meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Contacts,
   },
   {
     path: "/statistic",
     name: "Statistic",
-    meta: {layout: 'layout'},
-    component: ()=> import('../components/Statistic.vue'),
+    meta: { layout: "layout" },
+    component: () => import("../components/Statistic.vue"),
   },
   {
     path: "/help",
     name: "Help",
-       meta: {layout: 'layout'},
+    meta: { layout: "layout" },
     component: Help,
   },
 ];

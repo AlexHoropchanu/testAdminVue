@@ -22,55 +22,55 @@
           data-accordion="false"
         >
           <li class="nav-item">
-            <router-link to="statistic" class="nav-link">
+            <router-link :to="{ name: 'Statistic' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Статистика</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="banner-slider" class="nav-link">
+            <router-link :to="{ name: 'BannerSlider' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Банера / Слайдеры</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="films" class="nav-link">
+            <router-link :to="{ name: 'Films' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Фильмы</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="kino" class="nav-link">
+            <router-link :to="{ name: 'Kino' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Кинотеатры</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="news" class="nav-link">
+            <router-link :to="{ name: 'News' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Новости</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="promotions" class="nav-link">
+            <router-link :to="{ name: 'Promotions' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Акции</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="pages" class="nav-link">
+            <router-link :to="{ name: 'Pages' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Страницы</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="users" class="nav-link">
+            <router-link :to="{ name: 'Users' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Пользователи</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="mailing" class="nav-link">
+            <router-link :to="{ name: 'Mailing' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Рассылка</p>
             </router-link>
