@@ -2,19 +2,19 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Contacts from "../components/Contacts.vue";
 import Help from "../components/Help";
-// import Statistic from "../components/Statistic.vue";
 import BannerSlider from "../components/BannerSlider";
-import Films from "../components/Films/Films";
-import Kino from "../components/Kino";
+import AllCinemas from "../components/Cinemas/AllCinemas";
 import News from "../components/News";
 import Promotions from "../components/Promotions";
 import Pages from "../components/Pages";
 import Users from "../components/Users";
 import Mailing from "../components/Mailing";
-// import Login from "../components/AuthLayout/Login";
 import Layout from "../components/Layout/Layout";
 import AuthLayout from "../components/AuthLayout/AuthLayout";
-import EditFilm from "../components/Films/EditFilm.vue";
+import AllFilms from "../components/Films/AllFilms.vue";
+import Edit from "../components/Films/Edit.vue";
+import CardCinema from '../components/Cinemas/CardCinema.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,11 +25,35 @@ const routes = [
     component: AuthLayout,
   },
   {
-    path: "/films/edit/:id",
-    name: "EditFilm",
+    path: "/films",
+    name: "AllFilms",
     meta: { layout: "layout" },
-    component: EditFilm,
+    component: AllFilms,
   },
+  {
+    path: "/films/edit/:id",
+    name: "Edit",
+    meta: { layout: "layout" },
+    component: Edit,
+  },
+    {
+    path: "/cinemas/edit/:id",
+    name: "CardCinema",
+    meta: { layout: "layout" },
+    component: CardCinema,
+  },
+  // {
+  //   path: "/films/edit/:id",
+  //   name: "EditFilm",
+  //   meta: { layout: "layout" },
+  //   component: EditFilm,
+  // },
+  // {
+  //   path: "/films/commingSoon/:id",
+  //   name: "EditCommingSoonFilm",
+  //   meta: { layout: "layout" },
+  //   component: EditFilm,
+  // },
   {
     path: "/layout",
     name: "layout",
@@ -79,17 +103,12 @@ const routes = [
     component: News,
   },
   {
-    path: "/kino",
-    name: "Kino",
+    path: "/cinemas",
+    name: "AllCinemas",
     meta: { layout: "layout" },
-    component: Kino,
+    component: AllCinemas,
   },
-  {
-    path: "/films",
-    name: "Films",
-    meta: { layout: "layout" },
-    component: Films,
-  },
+
   {
     path: "/contacts",
     name: "Contacts",

@@ -25,8 +25,7 @@
       </div>
       <div class="wrapper__banner__right col-lg-9">
         <div class="wrapper" v-if="preloader">
-          <img v-if="card.picked" :src="card.imageUrl" alt="#" class="image-banner" /><br />
-          <img v-if="!card.picked" src="https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg" alt="#" class="image-banner" /><br />
+          <img :src="card.picked == false || card.imageUrl == ''? 'https://via.placeholder.com/1600x900.png' : card.imageUrl" alt="#" class="image-banner" /><br />
           <input
             type="file"
             style="display:none"
@@ -53,9 +52,9 @@ export default {
 
       preloader: false,
       card: {
-        picked: false,
+        picked: true,
         imageUrl:
-          "https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg",
+          "",
         id: new Date(),
         newPick: "",
         oldPick: "",
@@ -67,14 +66,11 @@ export default {
       .database()
       .ref("/banners/background")
       .once("value");
-    console.log(snapshot);
-    console.log(snapshot.val());
     const value = snapshot.val();
-    console.log(value);
     if (value != null) {
-      console.log(value);
       this.card.imageUrl = value.imageUrl;
       this.card.oldPick = value.imageUrl;
+      console.log(value)
     }
     this.preloader = true;
   },
@@ -106,19 +102,41 @@ export default {
           console.log(downloadUrl);
           this.card.imageUrl = downloadUrl;
           this.card.oldPick = downloadUrl;
-          this.state.newPic = "";
+          this.card.newPic = "";
         } catch (e) {
           console.error(e);
         }
       }
       }
+      else{
+        try{
+          await firebase
+              .storage()
+              .refFromURL(this.card.oldPick)
+              .delete();
+        }catch (e) {
+            console.log("error");
+          }
+      }
       const fileDb = {
         imageUrl: this.card.imageUrl,
       };
-      return await firebase
+      if(this.card.picked){
+        try{
+          return await firebase
         .database()
         .ref("/banners/background")
         .set(fileDb);
+        }catch(e){
+          console.log(e)
+        }
+      }else{
+        return await firebase
+        .database()
+        .ref("/banners/background/imageUrl")
+        .set('https://via.placeholder.com/1600x900.png');
+      }
+      
     },
   },
 };

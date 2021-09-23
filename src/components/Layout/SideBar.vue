@@ -34,13 +34,13 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Films' }" class="nav-link">
+            <router-link :to="{ name: 'AllFilms' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Фильмы</p>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Kino' }" class="nav-link">
+            <router-link :to="{ name: 'AllCinemas' }" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Кинотеатры</p>
             </router-link>
