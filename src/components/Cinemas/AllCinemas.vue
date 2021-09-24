@@ -98,7 +98,7 @@ export default {
           title: "",
           description: "",
           conditions:'',
-          logoUrl:'',
+          logoImgUrl:'',
           headImgUrl: "",
           gallery: ["", "", "", ""],
           hyperlink: "",
@@ -117,7 +117,7 @@ export default {
         ua: {
           title: "",
           description: "",
-          logoUrl:'',
+          logoImgUrl:'',
           headImgUrl: "",
           gallery: ["", "", "", ""],
           hyperlink: "",
